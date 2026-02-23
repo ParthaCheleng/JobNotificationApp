@@ -1,7 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
-import PlaceholderPage from './pages/PlaceholderPage';
+import LandingPage from './pages/LandingPage';
+import DashboardPage from './pages/DashboardPage';
+import SettingsPage from './pages/SettingsPage';
+import SavedPage from './pages/SavedPage';
+import DigestPage from './pages/DigestPage';
+import ProofPage from './pages/ProofPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
@@ -9,12 +14,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<PlaceholderPage title="Dashboard" />} />
-          <Route path="dashboard" element={<PlaceholderPage title="Dashboard" />} />
-          <Route path="saved" element={<PlaceholderPage title="Saved Jobs" />} />
-          <Route path="digest" element={<PlaceholderPage title="Daily Digest" />} />
-          <Route path="settings" element={<PlaceholderPage title="Settings" />} />
-          <Route path="proof" element={<PlaceholderPage title="Proof & Validation" />} />
+          <Route index element={<LandingPage />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="saved" element={<SavedPage />} />
+          <Route path="digest" element={<DigestPage />} />
+          <Route path="settings" element={<SettingsPage />} />
+          <Route path="proof" element={<ProofPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

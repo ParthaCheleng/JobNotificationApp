@@ -1,0 +1,62 @@
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: var(--spacing-64) var(--spacing-40);
+    text-align: center;
+    background-color: transparent;
+    /* Inherits #F7F6F3 */
+}
+
+.landing-content {
+    max-width: var(--max-text-width);
+    /* 720px */
+    margin: 0 auto;
+}
+
+.landing-headline {
+    font-size: 3.5rem;
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-24);
+    /* Ensures it behaves well on mobile */
+    word-wrap: break-word;
+}
+
+.landing-subtext {
+    font-size: 1.25rem;
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: var(--spacing-40);
+    line-height: 1.6;
+}
+
+.landing-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.landing-cta {
+    font-size: 1.1rem;
+    padding: var(--spacing-16) var(--spacing-40);
+}
+
+/* Base generic media queries typically needed for very large headlines */
+@media (max-width: 768px) {
+    .landing-headline {
+        font-size: 2.75rem;
+    }
+}
+
+@media (max-width: 375px) {
+    .landing-headline {
+        font-size: 2.25rem;
+    }
+
+    .landing-container {
+        padding: var(--spacing-40) var(--spacing-16);
+    }
+}

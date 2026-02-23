@@ -1,0 +1,52 @@
+.settings-container {
+    padding: var(--spacing-64) var(--spacing-40);
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.context-headline {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-8);
+    font-family: var(--font-heading);
+    text-align: center;
+}
+
+.context-subtext {
+    font-size: 1.1rem;
+    margin: 0 auto var(--spacing-64);
+    text-align: center;
+    opacity: 0.8;
+}
+
+.settings-card {
+    background-color: transparent;
+    border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    border-radius: 4px;
+    padding: var(--spacing-40);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-24);
+}
+
+.settings-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-16);
+    margin-top: var(--spacing-24);
+}
+
+@media (max-width: 768px) {
+    .settings-container {
+        padding: var(--spacing-40) var(--spacing-16);
+    }
+
+    .settings-card {
+        padding: var(--spacing-24) var(--spacing-16);
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: var(--spacing-24);
+    }
+}

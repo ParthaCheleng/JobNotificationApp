@@ -1,4 +1,4 @@
-.placeholder-container {
+.empty-state-container {
     padding: var(--spacing-64) var(--spacing-40);
     text-align: center;
     display: flex;
@@ -8,16 +8,18 @@
     min-height: 40vh;
 }
 
-.context-headline {
+.empty-state-headline {
     font-size: 2.5rem;
-    margin-bottom: var(--spacing-8);
+    margin-bottom: var(--spacing-16);
     font-family: var(--font-heading);
     color: var(--color-text);
+    line-height: 1.2;
 }
 
-.context-subtext {
+.empty-state-subtext {
     font-size: 1.1rem;
     opacity: 0.7;
-    /* Muted subtext */
+    /* Muted subtext feeling premium */
     margin: 0 auto;
+    max-width: var(--max-text-width);
 }
