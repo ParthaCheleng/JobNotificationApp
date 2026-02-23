@@ -28,12 +28,19 @@ export default function DigestPage() {
     const handleEmail = () => {
         if (!todaysDigest) return;
         const subject = encodeURIComponent("My 9AM Job Digest");
-        const body = encodeURIComponent(
-            `Here are my top ${todaysDigest.length} job matches for today:\n\n` +
-            todaysDigest.map((job, i) =>
+
+        // Truncate to 5 jobs to strictly stay beneath the Windows 2048 character limit for mailto: arrays
+        const emailJobs = todaysDigest.slice(0, 5);
+        let bodyText = `Here are my top job matches for today:\n\n` +
+            emailJobs.map((job, i) =>
                 `${i + 1}. ${job.title} at ${job.company}\n   Location: ${job.location} | Match: ${job.matchScore}%\n   Link: ${job.applyUrl}`
-            ).join('\n\n')
-        );
+            ).join('\n\n');
+
+        if (todaysDigest.length > 5) {
+            bodyText += `\n\n...and ${todaysDigest.length - 5} more matches waiting on your Dashboard!`;
+        }
+
+        const body = encodeURIComponent(bodyText);
         window.location.href = `mailto:?subject=${subject}&body=${body}`;
     };
 
