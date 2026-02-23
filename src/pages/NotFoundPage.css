@@ -1,0 +1,13 @@
+.not-found-container {
+    padding: var(--spacing-64) var(--spacing-40);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+}
+
+.not-found-actions {
+    margin-top: var(--spacing-40);
+}

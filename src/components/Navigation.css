@@ -1,0 +1,128 @@
+/* CSS for Navigation.jsx strictly adhering to the design system constraints */
+
+.navigation-shell {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    background-color: var(--color-bg);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing-40);
+    height: 64px;
+    /* Align to scale */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-brand {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.brand-link {
+    text-decoration: none;
+    color: var(--color-text);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-24);
+    height: 100%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    font-size: 0.95rem;
+    border-bottom: 2px solid transparent;
+    /* Minimal hover effect (no flashy animation, just text opacity if needed, but keeping it strictly calm) */
+    opacity: 0.8;
+    transition: opacity var(--transition-speed) ease-in-out, border-color var(--transition-speed) ease-in-out;
+}
+
+.nav-item:hover {
+    opacity: 1;
+}
+
+.nav-item.active {
+    opacity: 1;
+    color: var(--color-text);
+    border-bottom: 2px solid var(--color-accent);
+}
+
+/* Mobile Toggle Button */
+.mobile-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-8);
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hamburger-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Mobile Dropdown Menu */
+.mobile-dropdown {
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    padding: var(--spacing-8) var(--spacing-40);
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-nav-item {
+    text-decoration: none;
+    color: var(--color-text);
+    padding: var(--spacing-16) 0;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    opacity: 0.8;
+}
+
+.mobile-nav-item:hover {
+    opacity: 1;
+}
+
+.mobile-nav-item.active {
+    opacity: 1;
+    color: var(--color-accent);
+    /* Since it's a vertical list, maybe left border or just text color. 
+     Prompt says: "Active link must have a deep red underline (#8B0000)". 
+     We can do underline here too. */
+    border-bottom: 1px solid var(--color-accent);
+}
+
+/* Responsive Breakpoints */
+.desktop-hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .desktop-hidden {
+        display: flex;
+    }
+
+    .nav-container {
+        padding: 0 var(--spacing-16);
+    }
+
+    .mobile-dropdown {
+        padding: var(--spacing-8) var(--spacing-16);
+    }
+}
