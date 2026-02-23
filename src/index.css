@@ -1,0 +1,59 @@
+:root {
+  /* COLORS - STRICT 4 COLOR LIMIT */
+  --color-bg: #F7F6F3;
+  --color-text: #111111;
+  --color-accent: #8B0000;
+  --color-success: #6B8E23;
+
+  /* TYPOGRAPHY */
+  --font-body: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
+  --font-heading: 'Playfair Display', 'Merriweather', serif;
+  
+  /* SPACING - STRICT SCALE */
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-40: 40px;
+  --spacing-64: 64px;
+
+  /* LAYOUT */
+  --max-text-width: 720px;
+  --transition-speed: 150ms;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-24);
+  font-weight: 600;
+}
+
+p, ul, ol, blockquote {
+  max-width: var(--max-text-width);
+  margin-bottom: var(--spacing-16);
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Transitions */
+button, a, input, select, textarea, .transition {
+  transition: all var(--transition-speed) ease-in-out;
+}

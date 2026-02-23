@@ -1,0 +1,113 @@
+.layout-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP BAR */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-16) var(--spacing-40);
+    border-bottom: 1px solid var(--color-text);
+    /* Using text color for subtle borders instead of adding a 5th gray color */
+    opacity: 0.15;
+    /* Make the border subtle */
+}
+
+/* Override the opacity hack for border by using a pseudo element or just applying solid border with slight transparency if possible. Wait, only 4 colors allowed. So I'll use 15% opacity text color or just text color but very thin */
+.top-bar {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    opacity: 1;
+}
+
+.top-bar-left .app-name {
+    font-weight: 600;
+    font-family: var(--font-heading);
+}
+
+.top-bar-center .progress-indicator {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.top-bar-right .status-badge {
+    font-size: 0.85em;
+    padding: var(--spacing-8) var(--spacing-16);
+    border: 1px solid var(--color-text);
+    border-radius: 4px;
+}
+
+/* CONTEXT HEADER */
+.context-header {
+    padding: var(--spacing-64) var(--spacing-40) var(--spacing-40);
+    text-align: center;
+}
+
+.context-headline {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-8);
+}
+
+.context-subtext {
+    font-size: 1.1rem;
+    margin: 0 auto;
+}
+
+/* MAIN WORKSPACE */
+.main-workspace {
+    display: flex;
+    flex: 1;
+    padding: 0 var(--spacing-40) var(--spacing-64);
+    gap: var(--spacing-40);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.primary-column {
+    flex: 7;
+    /* 70% */
+}
+
+.secondary-column {
+    flex: 3;
+    /* 30% */
+}
+
+/* PROOF FOOTER */
+.proof-footer {
+    padding: var(--spacing-24) var(--spacing-40);
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    background-color: var(--color-bg);
+    display: flex;
+    justify-content: center;
+}
+
+.checklist {
+    display: flex;
+    gap: var(--spacing-40);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.checklist li {
+    font-size: 0.9em;
+    color: var(--color-text);
+    opacity: 0.5;
+}
+
+.checklist li.checked {
+    opacity: 1;
+    font-weight: 600;
+    color: var(--color-success);
+}
+
+/* Breakpoints */
+@media (max-width: 768px) {
+    .main-workspace {
+        flex-direction: column;
+    }
+}

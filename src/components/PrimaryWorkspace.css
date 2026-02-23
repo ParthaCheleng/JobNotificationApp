@@ -1,0 +1,107 @@
+.workspace-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-24);
+}
+
+.card {
+    background-color: transparent;
+    /* No off-white variations, strictly bg color */
+    border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+    border-radius: 4px;
+    padding: var(--spacing-24);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-24);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-8);
+}
+
+.form-row {
+    display: flex;
+    gap: var(--spacing-16);
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+input,
+select,
+textarea {
+    padding: var(--spacing-16);
+    border: 1px solid color-mix(in srgb, var(--color-text) 20%, transparent);
+    border-radius: 4px;
+    background-color: var(--color-bg);
+    outline: none;
+    font-size: 1rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-text);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-16);
+    margin-top: var(--spacing-40);
+}
+
+/* BUTTONS */
+button {
+    padding: var(--spacing-16) var(--spacing-24);
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    /* Use bg color as text within primary button */
+}
+
+.btn-primary:hover {
+    background-color: color-mix(in srgb, var(--color-accent) 80%, black);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text);
+    border-color: var(--color-text);
+}
+
+.btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
+}
+
+/* ERROR STATES */
+.error-state input {
+    border-color: var(--color-accent);
+}
+
+.error-state label {
+    color: var(--color-accent);
+}
+
+.error-message {
+    color: var(--color-accent);
+    font-size: 0.85em;
+    margin-top: var(--spacing-8);
+}
