@@ -1,0 +1,160 @@
+.digest-container {
+    padding: var(--spacing-64) var(--spacing-40);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.digest-container.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+
+.digest-container.email-layout {
+    background-color: var(--color-bg);
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-40) var(--spacing-16);
+}
+
+.btn-large {
+    font-size: 1.1rem;
+    padding: var(--spacing-16) var(--spacing-40);
+}
+
+.demo-note {
+    margin-top: var(--spacing-16);
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--color-text) 50%, transparent);
+    font-style: italic;
+}
+
+/* Internal Card - Email style */
+.digest-email-card {
+    background-color: #FFFFFF;
+    /* Stark white distinct from basic #F7F6F3 bg */
+    border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    width: 100%;
+    max-width: 720px;
+    border-radius: 4px;
+    /* No heavy shadows */
+}
+
+.digest-header {
+    padding: var(--spacing-40);
+    border-bottom: 2px solid var(--color-accent);
+    /* Deep red separator */
+    text-align: center;
+}
+
+.digest-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-text);
+    margin: 0 0 var(--spacing-8);
+}
+
+.digest-date {
+    font-size: 0.95rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.digest-list {
+    padding: var(--spacing-24);
+}
+
+.digest-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-16);
+    padding: var(--spacing-16) 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+
+.digest-item-row:last-child {
+    border-bottom: none;
+}
+
+.digest-item-details h4 {
+    margin: 0 0 4px;
+    font-size: 1.25rem;
+}
+
+.digest-company {
+    margin: 0 0 8px;
+    color: var(--color-accent);
+    font-weight: 500;
+}
+
+.digest-meta {
+    margin: 0;
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+}
+
+.digest-item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-8);
+}
+
+.digest-score {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #137333;
+    /* Dark green explicitly hardcoded per rule */
+    background-color: #e6f4ea;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.digest-footer {
+    padding: var(--spacing-24) var(--spacing-40);
+    background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
+    /* slight off-white block inside pure white card */
+    text-align: center;
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+}
+
+.digest-footer p {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    margin: 0 0 var(--spacing-16);
+}
+
+.digest-export-actions {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-16);
+    flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+    .digest-email-card {
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    }
+
+    .digest-header {
+        padding: var(--spacing-24);
+    }
+
+    .digest-item-row {
+        flex-direction: column;
+    }
+
+    .digest-item-actions {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
