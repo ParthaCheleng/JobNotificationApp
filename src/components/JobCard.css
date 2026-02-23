@@ -42,6 +42,35 @@
     white-space: nowrap;
 }
 
+.match-badge {
+    display: inline-block;
+    margin-top: var(--spacing-8);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.badge-success {
+    background-color: #e6f4ea;
+    color: #137333;
+}
+
+.badge-warning {
+    background-color: #fef7e0;
+    color: #b06000;
+}
+
+.badge-neutral {
+    background-color: #fce8e6;
+    color: #c5221f;
+}
+
+.badge-grey {
+    background-color: #f1f3f4;
+    color: #5f6368;
+}
+
 .job-company {
     font-size: 1.1rem;
     font-weight: 500;

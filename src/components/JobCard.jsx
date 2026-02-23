@@ -5,12 +5,27 @@ export default function JobCard({
     job,
     isSaved,
     onSaveToggle,
-    onViewClick
+    onViewClick,
+    matchScore
 }) {
+    const getScoreClass = (score) => {
+        if (score >= 80) return 'badge-success';
+        if (score >= 60) return 'badge-warning';
+        if (score >= 40) return 'badge-neutral';
+        return 'badge-grey';
+    };
+
     return (
         <div className="job-card">
             <div className="job-card-header">
-                <h3 className="job-title">{job.title}</h3>
+                <div>
+                    <h3 className="job-title">{job.title}</h3>
+                    {matchScore !== undefined && (
+                        <div className={`match-badge ${getScoreClass(matchScore)}`}>
+                            Match: {matchScore}%
+                        </div>
+                    )}
+                </div>
                 <span className="source-badge">{job.source}</span>
             </div>
 

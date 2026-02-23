@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { jobs } from '../data/jobs';
 import { useSavedJobs } from '../hooks/useSavedJobs';
+import { usePreferences } from '../hooks/usePreferences';
+import { calculateMatchScore } from '../utils/matchEngine';
 import JobCard from '../components/JobCard';
 import FilterBar from '../components/FilterBar';
 import JobDetailsModal from '../components/JobDetailsModal';
@@ -9,7 +11,9 @@ import './DashboardPage.css';
 
 export default function DashboardPage() {
     const { isJobSaved, toggleSaveJob } = useSavedJobs();
+    const { preferences, hasPreferences } = usePreferences();
     const [selectedJob, setSelectedJob] = useState(null);
+    const [showOnlyThreshold, setShowOnlyThreshold] = useState(false);
 
     const [filters, setFilters] = useState({
         keyword: '',
@@ -17,12 +21,25 @@ export default function DashboardPage() {
         mode: '',
         experience: '',
         source: '',
-        sort: 'latest' // 'latest' or 'oldest'
+        sort: 'latest' // 'latest', 'oldest', 'match', 'salary'
     });
 
+    // Calculate scores for all jobs first so we can sort and filter by them
+    const scoredJobs = useMemo(() => {
+        return jobs.map(job => ({
+            ...job,
+            matchScore: calculateMatchScore(job, preferences)
+        }));
+    }, [preferences]);
+
     const filteredJobs = useMemo(() => {
-        return jobs.filter(job => {
-            // Keyword Match (Title or Company)
+        return scoredJobs.filter(job => {
+            // 1. Threshold Filter
+            if (showOnlyThreshold && job.matchScore < (preferences.minMatchScore || 0)) {
+                return false;
+            }
+
+            // 2. Keyword Match (Title or Company) -> strict AND
             if (filters.keyword) {
                 const lowerKeyword = filters.keyword.toLowerCase();
                 const matchTitle = job.title.toLowerCase().includes(lowerKeyword);
@@ -30,47 +47,64 @@ export default function DashboardPage() {
                 if (!matchTitle && !matchCompany) return false;
             }
 
-            // Exact matches for dropdowns
-            if (filters.location && job.location !== filters.location) return false;
+            // 3. Exact matches for dropdowns -> strict AND
+            if (filters.location && job.location !== filters.location && !(job.location === 'PAN India' && filters.location !== '')) {
+                // Allow PAN India jobs to show up for specific location queries if remote, but let's stick to strict AND rules.
+                if (job.location !== filters.location) return false;
+            }
             if (filters.mode && job.mode !== filters.mode) return false;
             if (filters.experience && job.experience !== filters.experience) return false;
             if (filters.source && job.source !== filters.source) return false;
 
             return true;
         }).sort((a, b) => {
-            // Sorting based on days ago
             if (filters.sort === 'oldest') {
-                return a.postedDaysAgo - b.postedDaysAgo; // higher days ago = older vs lower days ago = newer -> wait.
-                // Actually: postedDaysAgo: 0 is newest. 10 is oldest.
-                // If oldest first: we want 10 to come before 0.
-                // So b.postedDaysAgo - a.postedDaysAgo
+                return b.postedDaysAgo - a.postedDaysAgo;
+            } else if (filters.sort === 'match') {
+                return b.matchScore - a.matchScore; // Highest first
+            } else if (filters.sort === 'salary') {
+                // Very basic salary extraction purely for sort functionality
+                const extractNum = (salaryStr) => {
+                    const match = salaryStr.match(/(\d+)/);
+                    return match ? parseInt(match[1], 10) : 0;
+                };
+                return extractNum(b.salaryRange) - extractNum(a.salaryRange);
             }
-            // Latest first (default): 0 comes before 10.
+            // Latest first (default)
             return a.postedDaysAgo - b.postedDaysAgo;
         });
-    }, [filters]);
-
-    // Fix sorting logic mathematically
-    // Actually, if a.posted = 10 and b.posted = 0
-    // 'oldest' first means 10 should come before 0. So b - a.
-    // 'latest' first means 0 should come before 10. So a - b.
-    if (filters.sort === 'oldest') {
-        filteredJobs.reverse();
-    }
+    }, [filters, scoredJobs, showOnlyThreshold, preferences.minMatchScore]);
 
     return (
         <div className="dashboard-container">
+            {!hasPreferences && (
+                <div className="preferences-banner" onClick={() => window.location.href = '/settings'}>
+                    Set your preferences to activate intelligent matching. Click here to configure.
+                </div>
+            )}
+
             <div className="dashboard-header">
                 <h1 className="context-headline">Job Board</h1>
                 <p className="context-subtext">Discover perfectly matched premium roles.</p>
+            </div>
+
+            <div className="threshold-toggle">
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={showOnlyThreshold}
+                        onChange={(e) => setShowOnlyThreshold(e.target.checked)}
+                    />
+                    Show only jobs above my threshold ({preferences.minMatchScore}%)
+                </label>
             </div>
 
             <FilterBar filters={filters} setFilters={setFilters} />
 
             {filteredJobs.length === 0 ? (
                 <EmptyState
-                    title="No jobs match your search."
-                    subtitle="Try adjusting your filters or keyword to find more opportunities."
+                    title="No roles match your criteria."
+                    subtitle="Adjust filters or lower threshold."
                 />
             ) : (
                 <div className="jobs-grid">
@@ -81,6 +115,7 @@ export default function DashboardPage() {
                             isSaved={isJobSaved(job.id)}
                             onSaveToggle={toggleSaveJob}
                             onViewClick={setSelectedJob}
+                            matchScore={job.matchScore}
                         />
                     ))}
                 </div>
