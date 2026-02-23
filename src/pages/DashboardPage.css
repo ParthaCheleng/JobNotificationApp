@@ -1,0 +1,29 @@
+.dashboard-container {
+    padding: var(--spacing-40);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.dashboard-header {
+    margin-bottom: var(--spacing-40);
+    text-align: center;
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-24);
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: var(--spacing-40) var(--spacing-16);
+    }
+}
+
+@media (max-width: 480px) {
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+}

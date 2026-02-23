@@ -1,0 +1,43 @@
+.filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16);
+    margin-bottom: var(--spacing-40);
+}
+
+.filter-search-input {
+    width: 100%;
+    font-size: 1.1rem;
+    padding: var(--spacing-16) var(--spacing-24);
+    background-color: color-mix(in srgb, var(--color-text) 3%, transparent);
+    /* slightly off-bg */
+    border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+}
+
+.filter-search-input:focus {
+    background-color: var(--color-bg);
+}
+
+.filter-dropdowns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-16);
+}
+
+.filter-dropdowns select {
+    flex: 1;
+    min-width: 140px;
+    padding: var(--spacing-16);
+}
+
+@media (max-width: 768px) {
+    .filter-dropdowns select {
+        flex: 1 1 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-dropdowns select {
+        flex: 1 1 100%;
+    }
+}

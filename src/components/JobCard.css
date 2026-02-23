@@ -1,0 +1,106 @@
+.job-card {
+    background-color: var(--color-bg);
+    border: 1px solid color-mix(in srgb, var(--color-text) 15%, transparent);
+    border-radius: 4px;
+    /* subtle rounded corners, not heavy */
+    padding: var(--spacing-24);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16);
+    transition: border-color var(--transition-speed);
+}
+
+.job-card:hover {
+    border-color: color-mix(in srgb, var(--color-text) 30%, transparent);
+    /* Intentionally NO heavy box shadows to preserve strict premium design rules */
+}
+
+.job-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-16);
+}
+
+.job-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin: 0;
+    line-height: 1.2;
+}
+
+.source-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
+    color: var(--color-text);
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+.job-company {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-accent);
+    /* Deep red subtle accent highlight */
+}
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-16);
+    font-size: 0.95rem;
+    color: color-mix(in srgb, var(--color-text) 75%, transparent);
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.job-footer {
+    margin-top: auto;
+    padding-top: var(--spacing-16);
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-16);
+}
+
+.posted-time {
+    font-size: 0.85rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+
+.job-actions {
+    display: flex;
+    gap: var(--spacing-8);
+}
+
+.job-actions button {
+    padding: var(--spacing-8) var(--spacing-16);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+    .job-card-header {
+        flex-direction: column-reverse;
+    }
+
+    .job-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .job-actions button {
+        flex: 1;
+    }
+}
