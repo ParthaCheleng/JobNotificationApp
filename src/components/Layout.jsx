@@ -14,15 +14,6 @@ export default function Layout() {
                 <Outlet />
             </main>
 
-            {/* Proof Footer */}
-            <footer className="proof-footer">
-                <ul className="checklist">
-                    <li className="checked">✓ UI Built</li>
-                    <li className="checked">✓ Routing Added</li>
-                    <li>○ API Connected</li>
-                    <li>○ Deployed</li>
-                </ul>
-            </footer>
         </div>
     );
 }
