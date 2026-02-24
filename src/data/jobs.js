@@ -1,3 +1,5 @@
+export const LOCATIONS = ["Bengaluru", "Pune", "Hyderabad", "Chennai", "Gurugram", "Noida", "Mumbai", "Delhi", "PAN India"];
+
 const generateJobs = () => {
     const companies = [
         "Infosys", "TCS", "Wipro", "Accenture", "Capgemini",
@@ -15,7 +17,6 @@ const generateJobs = () => {
         "Software Engineer I", "Cloud Support Associate", "Product Analyst"
     ];
 
-    const locations = ["Bengaluru", "Pune", "Hyderabad", "Chennai", "Gurugram", "Noida", "Mumbai", "Delhi"];
     const modes = ["Remote", "Hybrid", "Onsite"];
     const experiences = ["Fresher", "0-1", "1-3", "3-5"];
     const sources = ["LinkedIn", "Naukri", "Indeed"];
@@ -55,7 +56,7 @@ const generateJobs = () => {
 
         const mode = modes[(i * 5) % modes.length];
         // If remote, location is often PAN India or anywhere, but let's keep a base location for hybrid/onsite
-        const location = mode === "Remote" ? "PAN India" : locations[(i * 11) % locations.length];
+        const location = mode === "Remote" ? "PAN India" : LOCATIONS[(i * 11) % LOCATIONS.length];
 
         // Pick 3 random skills deterministically
         const skill1 = skillsPool[i % skillsPool.length];

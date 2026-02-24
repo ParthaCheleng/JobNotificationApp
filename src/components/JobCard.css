@@ -119,6 +119,54 @@
     font-size: 0.9rem;
 }
 
+.job-tracker-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-8);
+    padding: var(--spacing-8) 0;
+}
+
+.status-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+
+.status-select {
+    padding: 6px 32px 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    /* controlled by dynamic classes */
+    background-color: var(--color-bg);
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.status-neutral {
+    border-color: color-mix(in srgb, var(--color-text) 20%, transparent);
+    color: color-mix(in srgb, var(--color-text) 80%, transparent);
+}
+
+.status-applied {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border-color: #d2e3fc;
+}
+
+.status-rejected {
+    background-color: #fce8e6;
+    color: #c5221f;
+    border-color: #fad2cf;
+}
+
+.status-selected {
+    background-color: #e6f4ea;
+    color: #137333;
+    border-color: #ceead6;
+}
+
 @media (max-width: 480px) {
     .job-card-header {
         flex-direction: column-reverse;

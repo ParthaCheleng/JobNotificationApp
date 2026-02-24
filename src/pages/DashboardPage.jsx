@@ -3,17 +3,23 @@ import { jobs } from '../data/jobs';
 import { useSavedJobs } from '../hooks/useSavedJobs';
 import { usePreferences } from '../hooks/usePreferences';
 import { calculateMatchScore } from '../utils/matchEngine';
+import { useJobStatus } from '../hooks/useJobStatus';
+import { useToast } from '../hooks/useToast';
 import JobCard from '../components/JobCard';
 import FilterBar from '../components/FilterBar';
 import JobDetailsModal from '../components/JobDetailsModal';
+import Toast from '../components/Toast';
 import EmptyState from '../components/EmptyState';
 import './DashboardPage.css';
 
 export default function DashboardPage() {
-    const { isJobSaved, toggleSaveJob } = useSavedJobs();
+    const { savedJobIds, isJobSaved, toggleSaveJob } = useSavedJobs();
     const { preferences, hasPreferences } = usePreferences();
+    const { getJobStatus, updateJobStatus } = useJobStatus();
+    const { toast, showToast } = useToast();
+
     const [selectedJob, setSelectedJob] = useState(null);
-    const [showOnlyThreshold, setShowOnlyThreshold] = useState(false);
+    const [showThresholdOnly, setShowThresholdOnly] = useState(false);
 
     const [filters, setFilters] = useState({
         keyword: '',
@@ -21,10 +27,10 @@ export default function DashboardPage() {
         mode: '',
         experience: '',
         source: '',
-        sort: 'latest' // 'latest', 'oldest', 'match', 'salary'
+        status: '',
+        sort: 'latest'
     });
 
-    // Calculate scores for all jobs first so we can sort and filter by them
     const scoredJobs = useMemo(() => {
         return jobs.map(job => ({
             ...job,
@@ -32,14 +38,17 @@ export default function DashboardPage() {
         }));
     }, [preferences]);
 
+    const handleStatusChange = (jobId, newStatus) => {
+        updateJobStatus(jobId, newStatus);
+        showToast(`Status updated: ${newStatus}`, 'info');
+    };
+
     const filteredJobs = useMemo(() => {
         return scoredJobs.filter(job => {
-            // 1. Threshold Filter
-            if (showOnlyThreshold && job.matchScore < (preferences.minMatchScore || 0)) {
+            if (showThresholdOnly && job.matchScore < (preferences.minMatchScore || 0)) {
                 return false;
             }
 
-            // 2. Keyword Match (Title or Company) -> strict AND
             if (filters.keyword) {
                 const lowerKeyword = filters.keyword.toLowerCase();
                 const matchTitle = job.title.toLowerCase().includes(lowerKeyword);
@@ -47,33 +56,30 @@ export default function DashboardPage() {
                 if (!matchTitle && !matchCompany) return false;
             }
 
-            // 3. Exact matches for dropdowns -> strict AND
-            if (filters.location && job.location !== filters.location && !(job.location === 'PAN India' && filters.location !== '')) {
-                // Allow PAN India jobs to show up for specific location queries if remote, but let's stick to strict AND rules.
-                if (job.location !== filters.location) return false;
-            }
+            if (filters.location && job.location !== filters.location) return false;
             if (filters.mode && job.mode !== filters.mode) return false;
             if (filters.experience && job.experience !== filters.experience) return false;
             if (filters.source && job.source !== filters.source) return false;
 
+            const jobStatus = getJobStatus(job.id);
+            if (filters.status && jobStatus !== filters.status) return false;
+
             return true;
         }).sort((a, b) => {
             if (filters.sort === 'oldest') {
-                return b.postedDaysAgo - a.postedDaysAgo;
+                return a.postedDaysAgo - b.postedDaysAgo;
             } else if (filters.sort === 'match') {
-                return b.matchScore - a.matchScore; // Highest first
+                return b.matchScore - a.matchScore;
             } else if (filters.sort === 'salary') {
-                // Very basic salary extraction purely for sort functionality
                 const extractNum = (salaryStr) => {
                     const match = salaryStr.match(/(\d+)/);
                     return match ? parseInt(match[1], 10) : 0;
                 };
                 return extractNum(b.salaryRange) - extractNum(a.salaryRange);
             }
-            // Latest first (default)
             return a.postedDaysAgo - b.postedDaysAgo;
         });
-    }, [filters, scoredJobs, showOnlyThreshold, preferences.minMatchScore]);
+    }, [filters, scoredJobs, showThresholdOnly, preferences.minMatchScore, getJobStatus]);
 
     return (
         <div className="dashboard-container">
@@ -92,8 +98,8 @@ export default function DashboardPage() {
                 <label>
                     <input
                         type="checkbox"
-                        checked={showOnlyThreshold}
-                        onChange={(e) => setShowOnlyThreshold(e.target.checked)}
+                        checked={showThresholdOnly}
+                        onChange={(e) => setShowThresholdOnly(e.target.checked)}
                     />
                     Show only jobs above my threshold ({preferences.minMatchScore}%)
                 </label>
@@ -116,6 +122,8 @@ export default function DashboardPage() {
                             onSaveToggle={toggleSaveJob}
                             onViewClick={setSelectedJob}
                             matchScore={job.matchScore}
+                            currentStatus={getJobStatus(job.id)}
+                            onStatusChange={handleStatusChange}
                         />
                     ))}
                 </div>
@@ -127,6 +135,8 @@ export default function DashboardPage() {
                     onClose={() => setSelectedJob(null)}
                 />
             )}
+
+            {toast && <Toast message={toast.message} visible={true} />}
         </div>
     );
 }
