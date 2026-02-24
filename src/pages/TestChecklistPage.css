@@ -1,0 +1,209 @@
+.test-page-container {
+    padding: var(--spacing-64) var(--spacing-40);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 100px);
+    /* rough account for navbar */
+    background-color: var(--color-bg);
+}
+
+.test-page-card {
+    background-color: #FFFFFF;
+    border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    width: 100%;
+    max-width: 640px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-text) 3%, transparent);
+}
+
+.test-header {
+    padding: var(--spacing-32) var(--spacing-40);
+    border-bottom: 2px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-16);
+}
+
+.test-header h2 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    margin: 0;
+    font-size: 2rem;
+}
+
+.test-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-16);
+    flex-wrap: wrap;
+}
+
+.test-counter {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-text);
+    padding: 4px 12px;
+    background-color: color-mix(in srgb, var(--color-text) 5%, transparent);
+    border-radius: 4px;
+}
+
+.test-warning {
+    color: var(--color-accent);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.test-warning::before {
+    content: "⚠️";
+    font-size: 1rem;
+}
+
+.test-body {
+    padding: var(--spacing-24) var(--spacing-40);
+}
+
+.test-description {
+    color: color-mix(in srgb, var(--color-text) 70%, transparent);
+    margin: 0 0 var(--spacing-24) 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+    transition: all 0.2s ease;
+    background-color: #FAFAFA;
+}
+
+.checklist-item:hover {
+    background-color: #F0F0F0;
+    border-color: color-mix(in srgb, var(--color-text) 15%, transparent);
+}
+
+.checklist-item.checked {
+    background-color: color-mix(in srgb, #137333 4%, transparent);
+    border-color: color-mix(in srgb, #137333 20%, transparent);
+}
+
+.checkbox-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    z-index: 2;
+    margin: 0;
+}
+
+.custom-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid color-mix(in srgb, var(--color-text) 30%, transparent);
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.checkbox-wrapper input:checked~.custom-checkbox {
+    background-color: #137333;
+    border-color: #137333;
+}
+
+.checkbox-wrapper input:checked~.custom-checkbox::after {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+}
+
+.item-label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+}
+
+.checklist-item.checked .item-label {
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+    text-decoration: line-through;
+}
+
+.item-tooltip {
+    font-size: 0.8rem;
+    color: color-mix(in srgb, var(--color-text) 50%, transparent);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    width: fit-content;
+}
+
+.test-footer {
+    padding: var(--spacing-24) var(--spacing-40);
+    border-top: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    background-color: color-mix(in srgb, var(--color-text) 2%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-16);
+    flex-wrap: wrap;
+}
+
+.success-text {
+    font-weight: 600;
+    color: #137333;
+}
+
+.pending-text {
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--color-text) 60%, transparent);
+}
+
+@media (max-width: 600px) {
+    .test-page-container {
+        padding: var(--spacing-24) var(--spacing-16);
+    }
+
+    .test-header,
+    .test-body,
+    .test-footer {
+        padding-left: var(--spacing-24);
+        padding-right: var(--spacing-24);
+    }
+}

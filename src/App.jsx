@@ -8,6 +8,8 @@ import SavedPage from './pages/SavedPage';
 import DigestPage from './pages/DigestPage';
 import ProofPage from './pages/ProofPage';
 import NotFoundPage from './pages/NotFoundPage';
+import TestChecklistPage from './pages/TestChecklistPage';
+import ShipPage from './pages/ShipPage';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="digest" element={<DigestPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route path="proof" element={<ProofPage />} />
+          <Route path="jt/07-test" element={<TestChecklistPage />} />
+          <Route path="jt/08-ship" element={<ShipPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

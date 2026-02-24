@@ -1,0 +1,68 @@
+.ship-page-container {
+    padding: var(--spacing-64) var(--spacing-40);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 100px);
+    background-color: var(--color-bg);
+}
+
+.ship-lock-card,
+.ship-success-card {
+    background-color: #FFFFFF;
+    border: 1px solid color-mix(in srgb, var(--color-text) 10%, transparent);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 8px;
+    padding: var(--spacing-48) var(--spacing-32);
+    text-align: center;
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--color-text) 3%, transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-24);
+}
+
+.lock-icon,
+.success-icon {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: var(--spacing-8);
+}
+
+.ship-lock-card h2 {
+    font-family: var(--font-heading);
+    color: var(--color-accent);
+    margin: 0;
+    font-size: 2rem;
+}
+
+.ship-success-card h2 {
+    font-family: var(--font-heading);
+    color: #137333;
+    margin: 0;
+    font-size: 2rem;
+}
+
+.lock-message,
+.success-message {
+    font-size: 1.1rem;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.lock-status {
+    background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
+    color: var(--color-accent);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.redirect-btn,
+.ship-btn {
+    margin-top: var(--spacing-16);
+    font-size: 1.1rem;
+    padding: 12px 32px;
+}
